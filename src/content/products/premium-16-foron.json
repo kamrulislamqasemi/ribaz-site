@@ -1,17 +1,25 @@
 {
+  "ingredients": "১৬টি বাছাইকৃত মসলার মিশ্রণ।",
+  "usage_instructions": "রান্নার প্রয়োজন অনুযায়ী পরিমাণমতো ব্যবহার করুন।",
+  "active": true,
+  "storage_instructions": "শুকনো স্থানে সংরক্ষণ করুন।",
   "name": "প্রিমিয়াম ১৬ ফোড়ন",
   "slug": "premium-16-foron",
-  "category": "মিক্স মসলা",
-  "featured": true,
-  "active": true,
-  "short_description": "১৬টি আইটেম দিয়ে তৈরি প্রিমিয়াম ১৬ ফোড়ন।",
   "full_description": "১৬টি আইটেম দিয়ে তৈরি প্রিমিয়াম ১৬ ফোড়ন। এটি রান্নায় ঘ্রাণ, স্বাদ ও আলাদা মাত্রা যোগ করে।",
-  "ingredients": "১৬টি বাছাইকৃত মসলার মিশ্রণ।",
-  "benefits": "রান্নায় বিশেষ ঘ্রাণ ও স্বাদ যোগ করে।",
-  "usage_instructions": "রান্নার প্রয়োজন অনুযায়ী পরিমাণমতো ব্যবহার করুন।",
-  "storage_instructions": "শুকনো স্থানে সংরক্ষণ করুন।",
-  "images": [],
+  "featured": true,
   "variants": [
+    {
+      "regular_price": 900,
+      "sale_price": 0,
+      "stock": 0,
+      "weight": "১ কেজি"
+    },
+    {
+      "regular_price": 480,
+      "sale_price": -1,
+      "stock": 0,
+      "weight": "৫০০ গ্রাম"
+    },
     {
       "weight": "৪০০ গ্রাম",
       "regular_price": 400,
@@ -19,26 +27,32 @@
       "stock": 20
     },
     {
-      "weight": "২০০ গ্রাম",
-      "regular_price": 220,
-      "sale_price": 220,
+      "weight": "২৫০ গ্রাম",
+      "regular_price": 249,
+      "sale_price": 250,
       "stock": 20
     },
     {
-      "weight": "৫০ গ্রাম",
-      "regular_price": 50,
-      "sale_price": 50,
-      "stock": 20
+      "regular_price": 100,
+      "sale_price": 0,
+      "stock": 0,
+      "weight": "১০০ গ্রাম"
     },
     {
-      "weight": "৩০ গ্রাম",
-      "regular_price": 35,
-      "sale_price": 35,
-      "stock": 20
+      "weight": "৬০ গ্রাম",
+      "regular_price": 59,
+      "sale_price": 0,
+      "stock": 35
     }
+  ],
+  "images": [
+    "/uploads/747613332_1660889989376125_2435456470166283556_n.jpg"
   ],
   "related_products": [
     "premium-cumin-powder",
     "fresh-bay-leaf"
-  ]
+  ],
+  "short_description": "১৬টি আইটেম দিয়ে তৈরি প্রিমিয়াম ১৬ ফোড়ন।",
+  "benefits": "রান্নায় বিশেষ ঘ্রাণ ও স্বাদ যোগ করে।",
+  "category": "মিক্স মসলা"
 }
