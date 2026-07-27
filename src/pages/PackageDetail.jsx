@@ -1,4 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
+import { useEffect } from 'react'
 import ProductImage from '../components/ProductImage.jsx'
 import OrderButtons from '../components/OrderButtons.jsx'
 import { formatPrice, getPackage } from '../lib/content.js'
@@ -9,7 +10,15 @@ export default function PackageDetail() {
   const { slug } = useParams()
   const pkg = getPackage(slug)
   const { addItem } = useCart()
-  if (!pkg) return <section className="container-pad py-20"><h1 className="text-3xl font-bold">Package not found</h1><Link className="btn-primary mt-5" to="/packages">Back to packages</Link></section>
+  
+ useEffect(() => {
+  requestAnimationFrame(() => {
+    window.scrollTo(0, 0)
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+  })
+}, [slug])
+   if (!pkg) return <section className="container-pad py-20"><h1 className="text-3xl font-bold">Package not found</h1><Link className="btn-primary mt-5" to="/packages">Back to packages</Link></section>
   const price = Number(pkg.offer_price || pkg.total_price || 0)
   const message = makePackageMessage(pkg, 1)
   return (
