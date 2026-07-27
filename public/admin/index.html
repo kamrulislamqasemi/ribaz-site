@@ -5,282 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>RIBAZ Admin Portal</title>
 
+    <!-- Netlify Identity -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
     <style>
-      #ribaz-admin-user-menu {
-        position: fixed;
-        top: 8px;
-        right: 12px;
-        z-index: 999999;
-        font-family: Arial, sans-serif;
-      }
-
-      #ribaz-user-toggle {
-        width: 38px;
-        height: 38px;
-        border: 1px solid #e5e7eb;
-        background: #ffffff;
-        border-radius: 999px;
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-        cursor: pointer;
-        display: grid;
-        place-items: center;
+      body {
+        margin: 0;
         padding: 0;
-      }
-
-      #ribaz-user-avatar {
-        width: 30px;
-        height: 30px;
-        border-radius: 999px;
-        background: #7c3f1d;
-        color: #ffffff;
-        display: grid;
-        place-items: center;
-        font-size: 14px;
-        font-weight: 800;
-      }
-
-      #ribaz-user-dropdown {
-        display: none;
-        position: absolute;
-        top: 46px;
-        right: 0;
-        width: 285px;
-        background: #ffffff;
-        border: 1px solid #e5e7eb;
-        border-radius: 14px;
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.16);
-        overflow: hidden;
-      }
-
-      #ribaz-user-dropdown.show {
-        display: block;
-      }
-
-      .ribaz-user-info {
-        padding: 14px;
-        border-bottom: 1px solid #f1f5f9;
-      }
-
-      .ribaz-user-name {
-        font-size: 14px;
-        font-weight: 800;
-        color: #111827;
-        margin-bottom: 4px;
-      }
-
-      .ribaz-user-email {
-        font-size: 12px;
-        color: #6b7280;
-        word-break: break-all;
-      }
-
-      #ribaz-logout-btn {
-        width: 100%;
-        border: 0;
-        background: #ffffff;
-        color: #dc2626;
-        padding: 13px 14px;
-        text-align: left;
-        cursor: pointer;
-        font-size: 14px;
-        font-weight: 800;
-      }
-
-      #ribaz-logout-btn:hover {
-        background: #fef2f2;
-      }
-
-      @media (max-width: 640px) {
-        #ribaz-admin-user-menu {
-          top: 8px;
-          right: 8px;
-        }
-
-        #ribaz-user-dropdown {
-          width: 255px;
-        }
+        background: #f8fafc;
       }
     </style>
   </head>
 
   <body>
+    <!-- Decap CMS -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
     <script>
-      function getUserDisplay(user) {
-        var metadata = user.user_metadata || {};
-
-        var name =
-          metadata.full_name ||
-          metadata.name ||
-          metadata.display_name ||
-          "Admin";
-
-        var email = user.email || "";
-        var firstLetter = (name || email || "A").charAt(0).toUpperCase();
-
-        return {
-          name: name,
-          email: email,
-          firstLetter: firstLetter
-        };
-      }
-
-      function createAdminUserMenu() {
-        if (!window.netlifyIdentity) return;
-
-        var user = window.netlifyIdentity.currentUser();
-        if (!user) return;
-
-        var oldMenu = document.getElementById("ribaz-admin-user-menu");
-        if (oldMenu) oldMenu.remove();
-
-        var data = getUserDisplay(user);
-
-        var menu = document.createElement("div");
-        menu.id = "ribaz-admin-user-menu";
-
-        menu.innerHTML = `
-          <button id="ribaz-user-toggle" type="button" title="${data.email}">
-            <div id="ribaz-user-avatar">${data.firstLetter}</div>
-          </button>
-
-          <div id="ribaz-user-dropdown">
-            <div class="ribaz-user-info">
-              <div class="ribaz-user-name">${data.name}</div>
-              <div class="ribaz-user-email">${data.email}</div>
-            </div>
-
-            <button id="ribaz-logout-btn" type="button">
-              Log out
-            </button>
-          </div>
-        `;
-
-        document.body.appendChild(menu);
-
-        var toggle = document.getElementById("ribaz-user-toggle");
-        var dropdown = document.getElementById("ribaz-user-dropdown");
-        var logoutBtn = document.getElementById("ribaz-logout-btn");
-
-        toggle.addEventListener("click", function (event) {
-          event.stopPropagation();
-          dropdown.classList.toggle("show");
-        });
-
-        dropdown.addEventListener("click", function (event) {
-          event.stopPropagation();
-        });
-
-        logoutBtn.addEventListener("click", function () {
-          window.netlifyIdentity.logout();
-
-          setTimeout(function () {
-            window.location.href = "/admin/";
-          }, 300);
-        });
-
-        document.addEventListener("click", function () {
-          dropdown.classList.remove("show");
-        });
-      }
-
-      function hideDefaultDecapUserArea() {
-        var elements = document.querySelectorAll("div, span, a, button");
-
-        elements.forEach(function (el) {
-          if (el.closest("#ribaz-admin-user-menu")) return;
-
-          var text = (el.textContent || "").trim();
-          var rect = el.getBoundingClientRect();
-
-          if (
-            text === "ribazbd-admin-page" ||
-            text === "ribazbd.netlify.app" ||
-            text === "your-site-name.netlify.app"
-          ) {
-            el.style.display = "none";
-
-            if (el.parentElement) {
-              el.parentElement.style.display = "none";
-            }
-          }
-
-          if (
-            rect.top >= 20 &&
-            rect.top <= 75 &&
-            rect.left >= 160 &&
-            rect.left <= 330 &&
-            rect.width >= 24 &&
-            rect.width <= 60 &&
-            rect.height >= 24 &&
-            rect.height <= 60
-          ) {
-            el.style.display = "none";
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", function (user) {
+          if (!user && window.location.hash) {
+            window.netlifyIdentity.open();
           }
         });
-      }
 
-      function moveQuickAddLeft() {
-        var elements = document.querySelectorAll("button, a, span, div");
-
-        elements.forEach(function (el) {
-          if (el.closest("#ribaz-admin-user-menu")) return;
-
-          var text = (el.textContent || "").trim().toLowerCase();
-
-          if (text === "quick add" || text.includes("quick add")) {
-            var target = el.closest("button") || el.closest("a") || el;
-
-            target.style.marginRight = "130px";
-            target.style.position = "relative";
-            target.style.zIndex = "100";
-          }
+        window.netlifyIdentity.on("login", function () {
+          document.location.href = "/admin/";
         });
       }
-
-      function initRibazAdminCustomUI() {
-        createAdminUserMenu();
-        hideDefaultDecapUserArea();
-        moveQuickAddLeft();
-
-        setTimeout(createAdminUserMenu, 500);
-        setTimeout(createAdminUserMenu, 1500);
-        setTimeout(createAdminUserMenu, 3000);
-
-        setTimeout(hideDefaultDecapUserArea, 500);
-        setTimeout(hideDefaultDecapUserArea, 1500);
-        setTimeout(hideDefaultDecapUserArea, 3000);
-        setTimeout(hideDefaultDecapUserArea, 6000);
-
-        setTimeout(moveQuickAddLeft, 500);
-        setTimeout(moveQuickAddLeft, 1500);
-        setTimeout(moveQuickAddLeft, 3000);
-        setTimeout(moveQuickAddLeft, 6000);
-      }
-
-      window.addEventListener("load", function () {
-        initRibazAdminCustomUI();
-
-        if (window.netlifyIdentity) {
-          window.netlifyIdentity.on("login", function () {
-            setTimeout(initRibazAdminCustomUI, 800);
-          });
-
-          window.netlifyIdentity.on("logout", function () {
-            var menu = document.getElementById("ribaz-admin-user-menu");
-            if (menu) menu.remove();
-          });
-        }
-      });
-
-      setInterval(function () {
-        createAdminUserMenu();
-        hideDefaultDecapUserArea();
-        moveQuickAddLeft();
-      }, 3000);
     </script>
   </body>
 </html>
