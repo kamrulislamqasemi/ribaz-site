@@ -1,12 +1,70 @@
-<!doctype html>
-<html lang="bn">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RIBAZ Admin</title>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  </head>
-  <body>
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+<script>
+  function createAdminUserBadge(user) {
+    if (!user) return;
+
+    const existing = document.getElementById("admin-user-badge");
+    if (existing) existing.remove();
+
+    const metadata = user.user_metadata || {};
+    const name =
+      metadata.full_name ||
+      metadata.name ||
+      metadata.display_name ||
+      user.email ||
+      "Admin";
+
+    const email = user.email || "";
+
+    const badge = document.createElement("div");
+    badge.id = "admin-user-badge";
+    badge.innerHTML = `
+      <div style="
+        position: fixed;
+        top: 14px;
+        right: 58px;
+        z-index: 999999;
+        background: #ffffff;
+        color: #1f2937;
+        border: 1px solid #e5e7eb;
+        border-radius: 999px;
+        padding: 7px 12px;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        line-height: 1.2;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        max-width: 260px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      ">
+        <strong>${name}</strong>
+        ${email && email !== name ? `<span style="color:#6b7280;"> · ${email}</span>` : ""}
+      </div>
+    `;
+
+    document.body.appendChild(badge);
+  }
+
+  function waitForNetlifyIdentity() {
+    if (!window.netlifyIdentity) {
+      setTimeout(waitForNetlifyIdentity, 400);
+      return;
+    }
+
+    const currentUser = window.netlifyIdentity.currentUser();
+    createAdminUserBadge(currentUser);
+
+    window.netlifyIdentity.on("login", function (user) {
+      createAdminUserBadge(user);
+    });
+
+    window.netlifyIdentity.on("logout", function () {
+      const badge = document.getElementById("admin-user-badge");
+      if (badge) badge.remove();
+    });
+  }
+
+  window.addEventListener("load", waitForNetlifyIdentity);
+</script>
   </body>
 </html>
