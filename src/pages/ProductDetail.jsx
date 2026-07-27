@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import ProductImage from '../components/ProductImage.jsx'
 import OrderButtons from '../components/OrderButtons.jsx'
@@ -15,7 +15,17 @@ export default function ProductDetail() {
   const [qty, setQty] = useState(1)
   const [image, setImage] = useState(0)
   const { addItem } = useCart()
+useEffect(() => {
+  setVariantIndex(0)
+  setQty(1)
+  setImage(0)
 
+  requestAnimationFrame(() => {
+    window.scrollTo(0, 0)
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+  })
+}, [slug])
   if (!product) return <Missing />
   const variant = product.variants?.[variantIndex] || product.variants?.[0] || {}
   const price = getVariantPrice(variant)
