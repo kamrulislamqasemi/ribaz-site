@@ -5,9 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="RIBAZ - পরিবারের জন্য নিরাপদ, নির্ভরযোগ্য ও অথেনটিক হোমমেড গুঁড়া মসলা।" />
     <title>RIBAZ | রান্নায় শুদ্ধতা, জীবনে বিশুদ্ধতা</title>
+
+    <!-- Netlify Identity: needed to confirm email/invite links -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
     <div id="root"></div>
+
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", function (user) {
+          if (!user && window.location.hash) {
+            window.netlifyIdentity.open();
+          }
+        });
+
+        window.netlifyIdentity.on("login", function () {
+          document.location.href = "/admin/";
+        });
+      }
+    </script>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
