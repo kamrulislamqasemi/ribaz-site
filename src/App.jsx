@@ -1,4 +1,3 @@
-import ScrollToTop from './components/ScrollToTop.jsx'
 import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout.jsx'
 import ScrollToTop from './components/ScrollToTop.jsx'
