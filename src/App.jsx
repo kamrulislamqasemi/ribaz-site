@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Layout from './components/Layout.jsx'
 import Home from './pages/Home.jsx'
 import Products from './pages/Products.jsx'
@@ -13,9 +14,34 @@ import Contact from './pages/Contact.jsx'
 import NotFound from './pages/NotFound.jsx'
 import { CartProvider } from './context/CartContext.jsx'
 
+function ScrollToTopOnRouteChange() {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+
+    requestAnimationFrame(() => {
+      window.scrollTo(0, 0)
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
+    })
+
+    setTimeout(() => {
+      window.scrollTo(0, 0)
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
+    }, 50)
+  }, [pathname])
+
+  return null
+}
+
 export default function App() {
   return (
     <CartProvider>
+      <ScrollToTopOnRouteChange />
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
