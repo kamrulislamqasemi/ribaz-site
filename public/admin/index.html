@@ -1,70 +1,73 @@
-<script>
-  function createAdminUserBadge(user) {
-    if (!user) return;
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RIBAZ Admin Portal</title>
 
-    const existing = document.getElementById("admin-user-badge");
-    if (existing) existing.remove();
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  </head>
 
-    const metadata = user.user_metadata || {};
-    const name =
-      metadata.full_name ||
-      metadata.name ||
-      metadata.display_name ||
-      user.email ||
-      "Admin";
+  <body>
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
-    const email = user.email || "";
+    <script>
+      function showAdminUserBadge() {
+        if (!window.netlifyIdentity) return;
 
-    const badge = document.createElement("div");
-    badge.id = "admin-user-badge";
-    badge.innerHTML = `
-      <div style="
-        position: fixed;
-        top: 14px;
-        right: 58px;
-        z-index: 999999;
-        background: #ffffff;
-        color: #1f2937;
-        border: 1px solid #e5e7eb;
-        border-radius: 999px;
-        padding: 7px 12px;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        line-height: 1.2;
-        box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-        max-width: 260px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      ">
-        <strong>${name}</strong>
-        ${email && email !== name ? `<span style="color:#6b7280;"> · ${email}</span>` : ""}
-      </div>
-    `;
+        var user = window.netlifyIdentity.currentUser();
+        if (!user) return;
 
-    document.body.appendChild(badge);
-  }
+        var oldBadge = document.getElementById("ribaz-admin-user-badge");
+        if (oldBadge) oldBadge.remove();
 
-  function waitForNetlifyIdentity() {
-    if (!window.netlifyIdentity) {
-      setTimeout(waitForNetlifyIdentity, 400);
-      return;
-    }
+        var metadata = user.user_metadata || {};
+        var name =
+          metadata.full_name ||
+          metadata.name ||
+          metadata.display_name ||
+          user.email ||
+          "Admin";
 
-    const currentUser = window.netlifyIdentity.currentUser();
-    createAdminUserBadge(currentUser);
+        var badge = document.createElement("div");
+        badge.id = "ribaz-admin-user-badge";
+        badge.style.position = "fixed";
+        badge.style.top = "12px";
+        badge.style.right = "70px";
+        badge.style.zIndex = "999999";
+        badge.style.background = "#ffffff";
+        badge.style.color = "#1f2937";
+        badge.style.border = "1px solid #e5e7eb";
+        badge.style.borderRadius = "999px";
+        badge.style.padding = "7px 12px";
+        badge.style.fontFamily = "Arial, sans-serif";
+        badge.style.fontSize = "13px";
+        badge.style.fontWeight = "600";
+        badge.style.boxShadow = "0 6px 18px rgba(0,0,0,0.08)";
+        badge.style.maxWidth = "260px";
+        badge.style.whiteSpace = "nowrap";
+        badge.style.overflow = "hidden";
+        badge.style.textOverflow = "ellipsis";
+        badge.textContent = name;
 
-    window.netlifyIdentity.on("login", function (user) {
-      createAdminUserBadge(user);
-    });
+        document.body.appendChild(badge);
+      }
 
-    window.netlifyIdentity.on("logout", function () {
-      const badge = document.getElementById("admin-user-badge");
-      if (badge) badge.remove();
-    });
-  }
+      window.addEventListener("load", function () {
+        setTimeout(showAdminUserBadge, 1500);
+        setTimeout(showAdminUserBadge, 3000);
 
-  window.addEventListener("load", waitForNetlifyIdentity);
-</script>
+        if (window.netlifyIdentity) {
+          window.netlifyIdentity.on("login", function () {
+            setTimeout(showAdminUserBadge, 1000);
+          });
+
+          window.netlifyIdentity.on("logout", function () {
+            var badge = document.getElementById("ribaz-admin-user-badge");
+            if (badge) badge.remove();
+          });
+        }
+      });
+    </script>
   </body>
 </html>
