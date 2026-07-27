@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>RIBAZ Admin Portal</title>
 
+    <!-- Netlify Identity -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
 
   <body>
+    <!-- Decap CMS -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
+    <!-- Logged in admin name/email badge -->
     <script>
       function showAdminUserBadge() {
         if (!window.netlifyIdentity) return;
@@ -19,9 +22,12 @@
         if (!user) return;
 
         var oldBadge = document.getElementById("ribaz-admin-user-badge");
-        if (oldBadge) oldBadge.remove();
+        if (oldBadge) {
+          oldBadge.remove();
+        }
 
         var metadata = user.user_metadata || {};
+
         var name =
           metadata.full_name ||
           metadata.name ||
@@ -31,9 +37,11 @@
 
         var badge = document.createElement("div");
         badge.id = "ribaz-admin-user-badge";
+        badge.textContent = name;
+
         badge.style.position = "fixed";
-        badge.style.top = "12px";
-        badge.style.right = "70px";
+        badge.style.top = "58px";
+        badge.style.right = "12px";
         badge.style.zIndex = "999999";
         badge.style.background = "#ffffff";
         badge.style.color = "#1f2937";
@@ -44,11 +52,10 @@
         badge.style.fontSize = "13px";
         badge.style.fontWeight = "600";
         badge.style.boxShadow = "0 6px 18px rgba(0,0,0,0.08)";
-        badge.style.maxWidth = "260px";
+        badge.style.maxWidth = "calc(100vw - 24px)";
         badge.style.whiteSpace = "nowrap";
         badge.style.overflow = "hidden";
         badge.style.textOverflow = "ellipsis";
-        badge.textContent = name;
 
         document.body.appendChild(badge);
       }
@@ -56,6 +63,7 @@
       window.addEventListener("load", function () {
         setTimeout(showAdminUserBadge, 1500);
         setTimeout(showAdminUserBadge, 3000);
+        setTimeout(showAdminUserBadge, 5000);
 
         if (window.netlifyIdentity) {
           window.netlifyIdentity.on("login", function () {
@@ -64,7 +72,9 @@
 
           window.netlifyIdentity.on("logout", function () {
             var badge = document.getElementById("ribaz-admin-user-badge");
-            if (badge) badge.remove();
+            if (badge) {
+              badge.remove();
+            }
           });
         }
       });
