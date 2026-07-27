@@ -21,7 +21,6 @@
         height: 38px;
         border: 1px solid #e5e7eb;
         background: #ffffff;
-        color: #ffffff;
         border-radius: 999px;
         box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
         cursor: pointer;
@@ -35,7 +34,7 @@
         height: 30px;
         border-radius: 999px;
         background: #7c3f1d;
-        color: white;
+        color: #ffffff;
         display: grid;
         place-items: center;
         font-size: 14px;
@@ -93,11 +92,6 @@
         background: #fef2f2;
       }
 
-      /* Decap top bar spacing fix */
-      body {
-        overflow-x: hidden;
-      }
-
       @media (max-width: 640px) {
         #ribaz-admin-user-menu {
           top: 8px;
@@ -106,7 +100,6 @@
 
         #ribaz-user-dropdown {
           width: 255px;
-          right: 0;
         }
       }
     </style>
@@ -118,6 +111,7 @@
     <script>
       function getUserDisplay(user) {
         var metadata = user.user_metadata || {};
+
         var name =
           metadata.full_name ||
           metadata.name ||
@@ -127,7 +121,11 @@
         var email = user.email || "";
         var firstLetter = (name || email || "A").charAt(0).toUpperCase();
 
-        return { name: name, email: email, firstLetter: firstLetter };
+        return {
+          name: name,
+          email: email,
+          firstLetter: firstLetter
+        };
       }
 
       function createAdminUserMenu() {
@@ -172,8 +170,13 @@
           dropdown.classList.toggle("show");
         });
 
+        dropdown.addEventListener("click", function (event) {
+          event.stopPropagation();
+        });
+
         logoutBtn.addEventListener("click", function () {
           window.netlifyIdentity.logout();
+
           setTimeout(function () {
             window.location.href = "/admin/";
           }, 300);
@@ -184,40 +187,86 @@
         });
       }
 
-      function adjustQuickAdd() {
-        var allElements = document.querySelectorAll("button, a, div, span");
+      function hideDefaultDecapUserArea() {
+        var elements = document.querySelectorAll("div, span, a, button");
 
-        allElements.forEach(function (el) {
-          var text = (el.textContent || "").trim().toLowerCase();
+        elements.forEach(function (el) {
+          if (el.closest("#ribaz-admin-user-menu")) return;
 
-          if (text === "quick add" || text.includes("quick add")) {
-            var parent = el.closest("button") || el.closest("a") || el;
-            parent.style.marginLeft = "0px";
-            parent.style.marginRight = "120px";
-            parent.style.position = "relative";
-            parent.style.zIndex = "10";
+          var text = (el.textContent || "").trim();
+          var rect = el.getBoundingClientRect();
+
+          if (
+            text === "ribazbd-admin-page" ||
+            text === "ribazbd.netlify.app" ||
+            text === "your-site-name.netlify.app"
+          ) {
+            el.style.display = "none";
+
+            if (el.parentElement) {
+              el.parentElement.style.display = "none";
+            }
+          }
+
+          if (
+            rect.top >= 20 &&
+            rect.top <= 75 &&
+            rect.left >= 160 &&
+            rect.left <= 330 &&
+            rect.width >= 24 &&
+            rect.width <= 60 &&
+            rect.height >= 24 &&
+            rect.height <= 60
+          ) {
+            el.style.display = "none";
           }
         });
       }
 
-      function initRibazAdminTweaks() {
+      function moveQuickAddLeft() {
+        var elements = document.querySelectorAll("button, a, span, div");
+
+        elements.forEach(function (el) {
+          if (el.closest("#ribaz-admin-user-menu")) return;
+
+          var text = (el.textContent || "").trim().toLowerCase();
+
+          if (text === "quick add" || text.includes("quick add")) {
+            var target = el.closest("button") || el.closest("a") || el;
+
+            target.style.marginRight = "130px";
+            target.style.position = "relative";
+            target.style.zIndex = "100";
+          }
+        });
+      }
+
+      function initRibazAdminCustomUI() {
         createAdminUserMenu();
-        adjustQuickAdd();
+        hideDefaultDecapUserArea();
+        moveQuickAddLeft();
 
-        setTimeout(createAdminUserMenu, 1000);
-        setTimeout(createAdminUserMenu, 2500);
+        setTimeout(createAdminUserMenu, 500);
+        setTimeout(createAdminUserMenu, 1500);
+        setTimeout(createAdminUserMenu, 3000);
 
-        setTimeout(adjustQuickAdd, 1000);
-        setTimeout(adjustQuickAdd, 2500);
-        setTimeout(adjustQuickAdd, 5000);
+        setTimeout(hideDefaultDecapUserArea, 500);
+        setTimeout(hideDefaultDecapUserArea, 1500);
+        setTimeout(hideDefaultDecapUserArea, 3000);
+        setTimeout(hideDefaultDecapUserArea, 6000);
+
+        setTimeout(moveQuickAddLeft, 500);
+        setTimeout(moveQuickAddLeft, 1500);
+        setTimeout(moveQuickAddLeft, 3000);
+        setTimeout(moveQuickAddLeft, 6000);
       }
 
       window.addEventListener("load", function () {
-        initRibazAdminTweaks();
+        initRibazAdminCustomUI();
 
         if (window.netlifyIdentity) {
           window.netlifyIdentity.on("login", function () {
-            setTimeout(initRibazAdminTweaks, 800);
+            setTimeout(initRibazAdminCustomUI, 800);
           });
 
           window.netlifyIdentity.on("logout", function () {
@@ -227,7 +276,11 @@
         }
       });
 
-      setInterval(adjustQuickAdd, 3000);
+      setInterval(function () {
+        createAdminUserMenu();
+        hideDefaultDecapUserArea();
+        moveQuickAddLeft();
+      }, 3000);
     </script>
   </body>
 </html>
