@@ -1,5 +1,7 @@
+import ScrollToTop from './components/ScrollToTop.jsx'
 import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout.jsx'
+import ScrollToTop from './components/ScrollToTop.jsx'
 import Home from './pages/Home.jsx'
 import Products from './pages/Products.jsx'
 import ProductDetail from './pages/ProductDetail.jsx'
@@ -16,6 +18,7 @@ import { CartProvider } from './context/CartContext.jsx'
 export default function App() {
   return (
     <CartProvider>
+      <ScrollToTop />
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
