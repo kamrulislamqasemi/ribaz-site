@@ -1,0 +1,44 @@
+{
+  "name": "প্রিমিয়াম ১৬ ফোড়ন",
+  "slug": "premium-16-foron",
+  "category": "মিক্স মসলা",
+  "featured": true,
+  "active": true,
+  "short_description": "১৬টি আইটেম দিয়ে তৈরি প্রিমিয়াম ১৬ ফোড়ন।",
+  "full_description": "১৬টি আইটেম দিয়ে তৈরি প্রিমিয়াম ১৬ ফোড়ন। এটি রান্নায় ঘ্রাণ, স্বাদ ও আলাদা মাত্রা যোগ করে।",
+  "ingredients": "১৬টি বাছাইকৃত মসলার মিশ্রণ।",
+  "benefits": "রান্নায় বিশেষ ঘ্রাণ ও স্বাদ যোগ করে।",
+  "usage_instructions": "রান্নার প্রয়োজন অনুযায়ী পরিমাণমতো ব্যবহার করুন।",
+  "storage_instructions": "শুকনো স্থানে সংরক্ষণ করুন।",
+  "images": [],
+  "variants": [
+    {
+      "weight": "৪০০ গ্রাম",
+      "regular_price": 400,
+      "sale_price": 400,
+      "stock": 20
+    },
+    {
+      "weight": "২০০ গ্রাম",
+      "regular_price": 220,
+      "sale_price": 220,
+      "stock": 20
+    },
+    {
+      "weight": "৫০ গ্রাম",
+      "regular_price": 50,
+      "sale_price": 50,
+      "stock": 20
+    },
+    {
+      "weight": "৩০ গ্রাম",
+      "regular_price": 35,
+      "sale_price": 35,
+      "stock": 20
+    }
+  ],
+  "related_products": [
+    "premium-cumin-powder",
+    "fresh-bay-leaf"
+  ]
+}

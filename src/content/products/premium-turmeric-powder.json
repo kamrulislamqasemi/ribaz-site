@@ -1,0 +1,45 @@
+{
+  "name": "প্রিমিয়াম হলুদ গুঁড়া",
+  "slug": "premium-turmeric-powder",
+  "category": "গুঁড়া মসলা",
+  "featured": true,
+  "active": true,
+  "short_description": "উৎকৃষ্ট হলুদ ধুয়ে, রোদে শুকিয়ে তৈরি প্রাকৃতিক রং ও ঘ্রাণযুক্ত হলুদ গুঁড়া।",
+  "full_description": "বাজারের সবচেয়ে ভালো মানের হলুদ সংগ্রহ করে ধুয়ে পরিষ্কার করা হয়। কড়া রোদে সম্পূর্ণ শুকিয়ে তারপর গুঁড়া করা হয়। ফলে হলুদের প্রাকৃতিক রং ও ঘ্রাণ অক্ষুণ্ণ থাকে।",
+  "ingredients": "বাছাইকৃত শুকনো হলুদ।",
+  "benefits": "রান্নায় প্রাকৃতিক রং ও ঘ্রাণ বৃদ্ধি করে।",
+  "usage_instructions": "মাছ, মাংস, সবজি ও ডালের রান্নায় ব্যবহার করুন।",
+  "storage_instructions": "আর্দ্রতা থেকে দূরে রাখুন।",
+  "images": [],
+  "variants": [
+    {
+      "weight": "১ কেজি",
+      "regular_price": 520,
+      "sale_price": 500,
+      "stock": 20
+    },
+    {
+      "weight": "৫০০ গ্রাম",
+      "regular_price": 260,
+      "sale_price": 250,
+      "stock": 20
+    },
+    {
+      "weight": "২৫০ গ্রাম",
+      "regular_price": 150,
+      "sale_price": 150,
+      "stock": 20
+    },
+    {
+      "weight": "১৫০ গ্রাম",
+      "regular_price": 80,
+      "sale_price": 80,
+      "stock": 20
+    }
+  ],
+  "related_products": [
+    "premium-chili-powder",
+    "premium-coriander-powder",
+    "premium-cumin-powder"
+  ]
+}

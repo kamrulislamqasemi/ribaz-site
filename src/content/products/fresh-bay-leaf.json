@@ -1,0 +1,38 @@
+{
+  "name": "বাগানের ফ্রেশ তেজপাতা",
+  "slug": "fresh-bay-leaf",
+  "category": "তেজপাতা",
+  "featured": true,
+  "active": true,
+  "short_description": "বাগানের ফ্রেশ তেজপাতা—রান্নায় প্রাকৃতিক ঘ্রাণ যোগ করে।",
+  "full_description": "বাগানের ফ্রেশ তেজপাতা। রান্নায় প্রাকৃতিক ঘ্রাণ ও স্বাদ বাড়াতে ব্যবহারযোগ্য।",
+  "ingredients": "ফ্রেশ তেজপাতা।",
+  "benefits": "রান্নায় প্রাকৃতিক ঘ্রাণ বাড়ায়।",
+  "usage_instructions": "রান্নায় প্রয়োজন অনুযায়ী ব্যবহার করুন।",
+  "storage_instructions": "শুকনো পাত্রে সংরক্ষণ করুন।",
+  "images": [],
+  "variants": [
+    {
+      "weight": "১০০ গ্রাম",
+      "regular_price": 70,
+      "sale_price": 70,
+      "stock": 20
+    },
+    {
+      "weight": "৫০ গ্রাম",
+      "regular_price": 40,
+      "sale_price": 40,
+      "stock": 20
+    },
+    {
+      "weight": "৩০ গ্রাম",
+      "regular_price": 30,
+      "sale_price": 30,
+      "stock": 20
+    }
+  ],
+  "related_products": [
+    "premium-16-foron",
+    "premium-cumin-powder"
+  ]
+}

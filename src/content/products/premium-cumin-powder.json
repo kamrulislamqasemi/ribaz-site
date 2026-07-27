@@ -1,0 +1,45 @@
+{
+  "name": "প্রিমিয়াম জিরা গুঁড়া",
+  "slug": "premium-cumin-powder",
+  "category": "গুঁড়া মসলা",
+  "featured": true,
+  "active": true,
+  "short_description": "মচমচে শুকানো জিরা থেকে তৈরি সুগন্ধি জিরা গুঁড়া।",
+  "full_description": "উৎকৃষ্ট মানের জিরা সংগ্রহ করে ধুয়ে পরিষ্কার করা হয়। কড়া রোদে শুকিয়ে মচমচে অবস্থায় গুঁড়া করা হয়, যাতে দীর্ঘদিন সংরক্ষণ করলেও মান বজায় থাকে। রান্নায় এর ঘ্রাণ ও স্বাদ খাবারকে আরও সমৃদ্ধ করে।",
+  "ingredients": "বাছাইকৃত জিরা।",
+  "benefits": "বিশেষ রান্নায় আলাদা ঘ্রাণ ও স্বাদ যোগ করে।",
+  "usage_instructions": "মাংস, ডাল, ভর্তা ও বিভিন্ন রান্নায় ব্যবহার করুন।",
+  "storage_instructions": "এয়ারটাইট পাত্রে রাখুন।",
+  "images": [],
+  "variants": [
+    {
+      "weight": "৪০০ গ্রাম",
+      "regular_price": 450,
+      "sale_price": 400,
+      "stock": 20
+    },
+    {
+      "weight": "২০০ গ্রাম",
+      "regular_price": 250,
+      "sale_price": 220,
+      "stock": 20
+    },
+    {
+      "weight": "৫০ গ্রাম",
+      "regular_price": 60,
+      "sale_price": 60,
+      "stock": 20
+    },
+    {
+      "weight": "৩০ গ্রাম",
+      "regular_price": 40,
+      "sale_price": 40,
+      "stock": 20
+    }
+  ],
+  "related_products": [
+    "premium-chili-powder",
+    "premium-turmeric-powder",
+    "premium-coriander-powder"
+  ]
+}

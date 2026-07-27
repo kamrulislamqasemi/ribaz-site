@@ -1,0 +1,126 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# For local testing with Decap CMS, uncomment below and run: npx decap-server
+# local_backend: true
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+site_url: "https://your-site-name.netlify.app"
+display_url: "https://your-site-name.netlify.app"
+logo_url: "/logo-placeholder.svg"
+
+collections:
+  - name: "products"
+    label: "Products / পণ্য"
+    folder: "src/content/products"
+    create: true
+    extension: "json"
+    format: "json"
+    identifier_field: "name"
+    slug: "{{slug}}"
+    fields:
+      - { label: "Product Name", name: "name", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string", hint: "Example: premium-chili-powder" }
+      - { label: "Category", name: "category", widget: "select", options: ["গুঁড়া মসলা", "মিক্স মসলা", "তেজপাতা", "কম্বো/প্যাকেজ"] }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+      - { label: "Active", name: "active", widget: "boolean", default: true }
+      - { label: "Short Description", name: "short_description", widget: "text" }
+      - { label: "Full Description", name: "full_description", widget: "markdown" }
+      - { label: "Ingredients", name: "ingredients", widget: "text", required: false }
+      - { label: "Benefits", name: "benefits", widget: "text", required: false }
+      - { label: "Usage Instructions", name: "usage_instructions", widget: "text", required: false }
+      - { label: "Storage Instructions", name: "storage_instructions", widget: "text", required: false }
+      - label: "Images"
+        name: "images"
+        widget: "list"
+        required: false
+        field: { label: "Image", name: "image", widget: "image" }
+      - label: "Variants / Sizes"
+        name: "variants"
+        widget: "list"
+        summary: "{{fields.weight}} - {{fields.sale_price}}"
+        fields:
+          - { label: "Weight", name: "weight", widget: "string" }
+          - { label: "Regular Price", name: "regular_price", widget: "number", required: false, default: 0 }
+          - { label: "Sale Price", name: "sale_price", widget: "number", required: false, default: 0 }
+          - { label: "Stock", name: "stock", widget: "number", required: false, default: 0 }
+      - label: "Related Products"
+        name: "related_products"
+        widget: "list"
+        required: false
+        field: { label: "Product Slug", name: "slug", widget: "string" }
+
+  - name: "packages"
+    label: "Packages / প্যাকেজ"
+    folder: "src/content/packages"
+    create: true
+    extension: "json"
+    format: "json"
+    identifier_field: "name"
+    slug: "{{slug}}"
+    fields:
+      - { label: "Package Name", name: "name", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+      - { label: "Active", name: "active", widget: "boolean", default: true }
+      - { label: "Image", name: "image", widget: "image", required: false }
+      - { label: "Short Description", name: "short_description", widget: "text", required: false }
+      - label: "Items"
+        name: "items"
+        widget: "list"
+        fields:
+          - { label: "Item Text", name: "text", widget: "string" }
+      - { label: "Total Price", name: "total_price", widget: "number", required: false, default: 0 }
+      - { label: "Discount", name: "discount", widget: "number", required: false, default: 0 }
+      - { label: "Offer Price", name: "offer_price", widget: "number", required: false, default: 0 }
+      - { label: "Free Item", name: "free_item", widget: "string", required: false }
+      - { label: "Delivery Note", name: "delivery_note", widget: "text", required: false }
+      - { label: "Advance Payment Note", name: "advance_payment_note", widget: "text", required: false }
+      - { label: "Full Description", name: "full_description", widget: "markdown", required: false }
+
+  - name: "pages"
+    label: "Pages & Settings"
+    files:
+      - label: "Homepage"
+        name: "homepage"
+        file: "src/content/settings/homepage.json"
+        fields:
+          - { label: "Hero Title", name: "hero_title", widget: "string" }
+          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "text" }
+          - { label: "About Intro", name: "about_intro", widget: "markdown" }
+          - label: "Why Choose Points"
+            name: "trust_points"
+            widget: "list"
+            field: { label: "Point", name: "point", widget: "string" }
+          - label: "Coming Soon Products"
+            name: "coming_soon"
+            widget: "list"
+            field: { label: "Product", name: "product", widget: "string" }
+      - label: "Contact Settings"
+        name: "contact"
+        file: "src/content/settings/contact.json"
+        fields:
+          - { label: "Primary Phone", name: "primary_phone", widget: "string" }
+          - label: "Phone Numbers"
+            name: "phones"
+            widget: "list"
+            field: { label: "Phone", name: "phone", widget: "string" }
+          - { label: "WhatsApp Number", name: "whatsapp_number", widget: "string", hint: "Use country code, example: 8801974673371" }
+          - { label: "Messenger Link", name: "messenger_link", widget: "string" }
+          - { label: "Facebook Page URL", name: "facebook_page_url", widget: "string" }
+          - { label: "Address", name: "address", widget: "text", required: false }
+          - { label: "Delivery Charge", name: "delivery_charge", widget: "number", default: 80 }
+      - label: "Reviews"
+        name: "reviews"
+        file: "src/content/settings/reviews.json"
+        fields:
+          - label: "Reviews"
+            name: "reviews"
+            widget: "list"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Text", name: "text", widget: "text" }
+              - { label: "Rating", name: "rating", widget: "number", default: 5 }

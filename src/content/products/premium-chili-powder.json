@@ -1,0 +1,45 @@
+{
+  "name": "প্রিমিয়াম মরিচ গুঁড়া",
+  "slug": "premium-chili-powder",
+  "category": "গুঁড়া মসলা",
+  "featured": true,
+  "active": true,
+  "short_description": "ধুয়ে-রোদে শুকিয়ে তৈরি প্রাকৃতিক ঝাল, রং ও ঘ্রাণযুক্ত মরিচ গুঁড়া।",
+  "full_description": "উৎকৃষ্ট মানের মরিচ সংগ্রহ করে ধুয়ে পরিষ্কার করা হয়। সম্পূর্ণ শুকানোর পরই গুঁড়া করা হয়। তাই এটি সহজে নষ্ট হয় না। ঝাল, রং ও ঘ্রাণ সবকিছুই থাকে প্রাকৃতিক। অল্প পরিমাণেই রান্নায় দারুণ স্বাদ এনে দেয়।",
+  "ingredients": "বাছাইকৃত শুকনো লাল মরিচ।",
+  "benefits": "প্রাকৃতিক ঝাল, সুন্দর রং ও ঘ্রাণ।",
+  "usage_instructions": "তরকারি, ভর্তা, মাছ ও মাংস রান্নায় পরিমাণমতো ব্যবহার করুন।",
+  "storage_instructions": "শুকনো ও ঠান্ডা স্থানে এয়ারটাইট পাত্রে সংরক্ষণ করুন।",
+  "images": [],
+  "variants": [
+    {
+      "weight": "১ কেজি",
+      "regular_price": 650,
+      "sale_price": 550,
+      "stock": 20
+    },
+    {
+      "weight": "৫০০ গ্রাম",
+      "regular_price": 330,
+      "sale_price": 280,
+      "stock": 20
+    },
+    {
+      "weight": "২৫০ গ্রাম",
+      "regular_price": 175,
+      "sale_price": 150,
+      "stock": 20
+    },
+    {
+      "weight": "১৫০ গ্রাম",
+      "regular_price": 100,
+      "sale_price": 90,
+      "stock": 20
+    }
+  ],
+  "related_products": [
+    "premium-turmeric-powder",
+    "premium-coriander-powder",
+    "premium-cumin-powder"
+  ]
+}
