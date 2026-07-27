@@ -7,77 +7,178 @@
 
     <!-- Netlify Identity -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+    <style>
+      /*
+        RIBAZ admin small custom UI fixes
+      */
+
+      #ribaz-admin-user-box {
+        position: fixed;
+        top: 48px;
+        right: 12px;
+        z-index: 999999;
+        width: 260px;
+        max-width: calc(100vw - 24px);
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+      }
+
+      #ribaz-admin-user-email {
+        padding: 11px 13px;
+        font-size: 13px;
+        font-weight: 700;
+        color: #111827;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        border-bottom: 1px solid #f1f5f9;
+        background: #ffffff;
+      }
+
+      #ribaz-admin-logout-btn {
+        width: 100%;
+        border: 0;
+        background: #7c2d12;
+        color: #ffffff;
+        padding: 11px 13px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      #ribaz-admin-logout-btn:hover {
+        background: #9a3412;
+      }
+
+      /*
+        Quick add button একটু বামে নিতে Decap CMS-এর top bar-এর প্রথম button target করা হচ্ছে।
+        Decap CMS class name stable না, তাই text-based JS দিয়েও নিচে backup আছে।
+      */
+      .ribaz-quick-add-shift {
+        transform: translateX(-10px) !important;
+      }
+
+      @media (max-width: 600px) {
+        #ribaz-admin-user-box {
+          top: 52px;
+          right: 8px;
+          width: 245px;
+        }
+
+        #ribaz-admin-user-email,
+        #ribaz-admin-logout-btn {
+          font-size: 12px;
+        }
+      }
+    </style>
   </head>
 
   <body>
     <!-- Decap CMS -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
-    <!-- Logged in admin name/email badge -->
     <script>
-      function showAdminUserBadge() {
-        if (!window.netlifyIdentity) return;
+      function getCurrentAdminUser() {
+        if (!window.netlifyIdentity) return null;
+        return window.netlifyIdentity.currentUser();
+      }
 
-        var user = window.netlifyIdentity.currentUser();
+      function showAdminUserBox() {
+        var user = getCurrentAdminUser();
         if (!user) return;
 
-        var oldBadge = document.getElementById("ribaz-admin-user-badge");
-        if (oldBadge) {
-          oldBadge.remove();
+        var oldBox = document.getElementById("ribaz-admin-user-box");
+        if (oldBox) {
+          oldBox.remove();
         }
 
         var metadata = user.user_metadata || {};
+        var email = user.email || metadata.email || "Admin";
 
-        var name =
-          metadata.full_name ||
-          metadata.name ||
-          metadata.display_name ||
-          user.email ||
-          "Admin";
+        var box = document.createElement("div");
+        box.id = "ribaz-admin-user-box";
 
-        var badge = document.createElement("div");
-        badge.id = "ribaz-admin-user-badge";
-        badge.textContent = name;
+        var emailDiv = document.createElement("div");
+        emailDiv.id = "ribaz-admin-user-email";
+        emailDiv.textContent = email;
 
-        badge.style.position = "fixed";
-        badge.style.top = "58px";
-        badge.style.right = "12px";
-        badge.style.zIndex = "999999";
-        badge.style.background = "#ffffff";
-        badge.style.color = "#1f2937";
-        badge.style.border = "1px solid #e5e7eb";
-        badge.style.borderRadius = "999px";
-        badge.style.padding = "7px 12px";
-        badge.style.fontFamily = "Arial, sans-serif";
-        badge.style.fontSize = "13px";
-        badge.style.fontWeight = "600";
-        badge.style.boxShadow = "0 6px 18px rgba(0,0,0,0.08)";
-        badge.style.maxWidth = "calc(100vw - 24px)";
-        badge.style.whiteSpace = "nowrap";
-        badge.style.overflow = "hidden";
-        badge.style.textOverflow = "ellipsis";
+        var logoutBtn = document.createElement("button");
+        logoutBtn.id = "ribaz-admin-logout-btn";
+        logoutBtn.type = "button";
+        logoutBtn.textContent = "Log out";
 
-        document.body.appendChild(badge);
+        logoutBtn.addEventListener("click", function () {
+          if (window.netlifyIdentity) {
+            window.netlifyIdentity.logout();
+          }
+
+          var currentBox = document.getElementById("ribaz-admin-user-box");
+          if (currentBox) currentBox.remove();
+
+          setTimeout(function () {
+            window.location.href = "/admin/";
+          }, 500);
+        });
+
+        box.appendChild(emailDiv);
+        box.appendChild(logoutBtn);
+        document.body.appendChild(box);
+      }
+
+      function shiftQuickAddButton() {
+        var buttons = Array.from(document.querySelectorAll("button"));
+
+        buttons.forEach(function (button) {
+          var text = (button.innerText || button.textContent || "").trim().toLowerCase();
+
+          if (text.includes("quick add")) {
+            button.classList.add("ribaz-quick-add-shift");
+            button.style.marginLeft = "-10px";
+          }
+        });
+      }
+
+      function initRibazAdminFixes() {
+        showAdminUserBox();
+        shiftQuickAddButton();
+
+        setTimeout(showAdminUserBox, 1000);
+        setTimeout(showAdminUserBox, 2500);
+        setTimeout(shiftQuickAddButton, 1000);
+        setTimeout(shiftQuickAddButton, 2500);
       }
 
       window.addEventListener("load", function () {
-        setTimeout(showAdminUserBadge, 1500);
-        setTimeout(showAdminUserBadge, 3000);
-        setTimeout(showAdminUserBadge, 5000);
+        initRibazAdminFixes();
 
         if (window.netlifyIdentity) {
           window.netlifyIdentity.on("login", function () {
-            setTimeout(showAdminUserBadge, 1000);
+            setTimeout(initRibazAdminFixes, 800);
           });
 
           window.netlifyIdentity.on("logout", function () {
-            var badge = document.getElementById("ribaz-admin-user-badge");
-            if (badge) {
-              badge.remove();
-            }
+            var box = document.getElementById("ribaz-admin-user-box");
+            if (box) box.remove();
           });
         }
       });
+
+      setInterval(function () {
+        shiftQuickAddButton();
+
+        var user = getCurrentAdminUser();
+        var box = document.getElementById("ribaz-admin-user-box");
+
+        if (user && !box) {
+          showAdminUserBox();
+        }
+      }, 3000);
     </script>
   </body>
 </html>
