@@ -17,38 +17,28 @@
       }
 
       #ribaz-user-toggle {
-        display: flex;
-        align-items: center;
-        gap: 8px;
+        width: 38px;
+        height: 38px;
         border: 1px solid #e5e7eb;
         background: #ffffff;
-        color: #111827;
+        color: #ffffff;
         border-radius: 999px;
-        padding: 7px 12px;
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
         cursor: pointer;
-        font-size: 13px;
-        font-weight: 700;
-        max-width: 270px;
-      }
-
-      #ribaz-user-toggle span {
-        display: block;
-        max-width: 210px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        display: grid;
+        place-items: center;
+        padding: 0;
       }
 
       #ribaz-user-avatar {
-        width: 26px;
-        height: 26px;
+        width: 30px;
+        height: 30px;
         border-radius: 999px;
         background: #7c3f1d;
         color: white;
         display: grid;
         place-items: center;
-        font-size: 13px;
+        font-size: 14px;
         font-weight: 800;
       }
 
@@ -57,7 +47,7 @@
         position: absolute;
         top: 46px;
         right: 0;
-        width: 280px;
+        width: 285px;
         background: #ffffff;
         border: 1px solid #e5e7eb;
         border-radius: 14px;
@@ -103,23 +93,20 @@
         background: #fef2f2;
       }
 
+      /* Decap top bar spacing fix */
+      body {
+        overflow-x: hidden;
+      }
+
       @media (max-width: 640px) {
         #ribaz-admin-user-menu {
-          top: 7px;
+          top: 8px;
           right: 8px;
         }
 
-        #ribaz-user-toggle {
-          padding: 6px 9px;
-          max-width: 190px;
-        }
-
-        #ribaz-user-toggle span {
-          max-width: 130px;
-        }
-
         #ribaz-user-dropdown {
-          width: 250px;
+          width: 255px;
+          right: 0;
         }
       }
     </style>
@@ -135,7 +122,6 @@
           metadata.full_name ||
           metadata.name ||
           metadata.display_name ||
-          user.email ||
           "Admin";
 
         var email = user.email || "";
@@ -159,9 +145,8 @@
         menu.id = "ribaz-admin-user-menu";
 
         menu.innerHTML = `
-          <button id="ribaz-user-toggle" type="button">
+          <button id="ribaz-user-toggle" type="button" title="${data.email}">
             <div id="ribaz-user-avatar">${data.firstLetter}</div>
-            <span>${data.name}</span>
           </button>
 
           <div id="ribaz-user-dropdown">
@@ -199,30 +184,32 @@
         });
       }
 
-      function moveQuickAddLeft() {
-        var buttons = document.querySelectorAll("button");
+      function adjustQuickAdd() {
+        var allElements = document.querySelectorAll("button, a, div, span");
 
-        buttons.forEach(function (button) {
-          var text = (button.textContent || "").trim().toLowerCase();
+        allElements.forEach(function (el) {
+          var text = (el.textContent || "").trim().toLowerCase();
 
-          if (text.includes("quick add")) {
-            button.style.transform = "translateX(-60px)";
-            button.style.position = "relative";
-            button.style.zIndex = "999998";
+          if (text === "quick add" || text.includes("quick add")) {
+            var parent = el.closest("button") || el.closest("a") || el;
+            parent.style.marginLeft = "0px";
+            parent.style.marginRight = "120px";
+            parent.style.position = "relative";
+            parent.style.zIndex = "10";
           }
         });
       }
 
       function initRibazAdminTweaks() {
         createAdminUserMenu();
-        moveQuickAddLeft();
+        adjustQuickAdd();
 
         setTimeout(createAdminUserMenu, 1000);
         setTimeout(createAdminUserMenu, 2500);
 
-        setTimeout(moveQuickAddLeft, 1000);
-        setTimeout(moveQuickAddLeft, 2500);
-        setTimeout(moveQuickAddLeft, 5000);
+        setTimeout(adjustQuickAdd, 1000);
+        setTimeout(adjustQuickAdd, 2500);
+        setTimeout(adjustQuickAdd, 5000);
       }
 
       window.addEventListener("load", function () {
@@ -240,7 +227,7 @@
         }
       });
 
-      setInterval(moveQuickAddLeft, 3000);
+      setInterval(adjustQuickAdd, 3000);
     </script>
   </body>
 </html>
