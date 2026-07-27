@@ -9,7 +9,7 @@ media_folder: "public/uploads"
 public_folder: "/uploads"
 
 site_url: "https://ribazbd.netlify.app"
-display_url: "ribazbd"
+display_url: "ribazbd-admin-page"
 logo_url: "/logo-placeholder.svg"
 
 collections:
