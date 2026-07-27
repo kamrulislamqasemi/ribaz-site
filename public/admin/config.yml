@@ -8,8 +8,8 @@ backend:
 media_folder: "public/uploads"
 public_folder: "/uploads"
 
-site_url: "https://your-site-name.netlify.app"
-display_url: "https://your-site-name.netlify.app"
+site_url: "https://ribazbd.netlify.app"
+display_url: "ribazbd"
 logo_url: "/logo-placeholder.svg"
 
 collections:
