@@ -1,16 +1,12 @@
 {
+  "ingredients": "বাছাইকৃত আস্ত ধনিয়া।",
+  "usage_instructions": "মাছ, মাংস, সবজি ও ডালের রান্নায় ব্যবহার করুন।",
+  "active": true,
+  "storage_instructions": "শুকনো জায়গায় রাখুন।",
   "name": "প্রিমিয়াম ধনিয়া গুঁড়া",
   "slug": "premium-coriander-powder",
-  "category": "গুঁড়া মসলা",
-  "featured": true,
-  "active": true,
-  "short_description": "বিশুদ্ধ, সুগন্ধি ও প্রিমিয়াম মানের ধনিয়া গুঁড়া।",
   "full_description": "সর্বোচ্চ মানের আস্ত ধনিয়া সংগ্রহ করা হয়। ধোয়ার সময় কাদা, মাটি, পাথর ও অন্যান্য অমিশ্রণ আলাদা করে ফেলা হয়। এরপর ভালোভাবে শুকিয়ে গুঁড়া করা হয়। ফলে গ্রাহক পান বিশুদ্ধ, সুগন্ধি ও প্রিমিয়াম মানের ধনিয়া গুঁড়া।",
-  "ingredients": "বাছাইকৃত আস্ত ধনিয়া।",
-  "benefits": "রান্নায় ঘ্রাণ ও স্বাদ বাড়ায়।",
-  "usage_instructions": "মাছ, মাংস, সবজি ও ডালের রান্নায় ব্যবহার করুন।",
-  "storage_instructions": "শুকনো জায়গায় রাখুন।",
-  "images": [],
+  "featured": true,
   "variants": [
     {
       "weight": "১ কেজি",
@@ -37,9 +33,15 @@
       "stock": 20
     }
   ],
+  "images": [
+    "/uploads/inbound4533488295907976294.jpg"
+  ],
   "related_products": [
     "premium-chili-powder",
     "premium-turmeric-powder",
     "premium-cumin-powder"
-  ]
+  ],
+  "short_description": "বিশুদ্ধ, সুগন্ধি ও প্রিমিয়াম মানের ধনিয়া গুঁড়া।",
+  "benefits": "রান্নায় ঘ্রাণ ও স্বাদ বাড়ায়।",
+  "category": "গুঁড়া মসলা"
 }
