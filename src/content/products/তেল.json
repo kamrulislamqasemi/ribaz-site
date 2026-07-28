@@ -1,0 +1,17 @@
+{
+  "featured": false,
+  "active": true,
+  "variants": [
+    {
+      "regular_price": 0,
+      "sale_price": 0,
+      "stock": 0,
+      "weight": "100"
+    }
+  ],
+  "name": "তেল",
+  "slug": "tel",
+  "category": "গুঁড়া মসলা",
+  "short_description": "test",
+  "full_description": "test"
+}
